@@ -1,12 +1,7 @@
 package com.example.game_shop.user.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.time.*;
+import lombok.*;
 
 import com.example.game_shop.global.common.BaseEntity;
 
