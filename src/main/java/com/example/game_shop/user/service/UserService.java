@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.game_shop.global.exception.BadRequestException;
+import com.example.game_shop.global.exception.NotFoundException;
 import com.example.game_shop.user.domain.User;
 import com.example.game_shop.user.dto.Request.UserSignUpRequest;
 import com.example.game_shop.user.dto.Response.UserResponse;
@@ -32,5 +33,12 @@ public class UserService {
 
         User saved = userRepository.save(user);
         return UserResponse.from(saved);
+    }
+
+    public UserResponse getUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("유저를 찾을 수 없습니다. id=" + id));
+
+        return UserResponse.from(user);
     }
 }
