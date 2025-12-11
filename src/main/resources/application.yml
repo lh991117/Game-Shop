@@ -1,0 +1,21 @@
+# src/main/resources/application.yml
+spring:
+  datasource:
+    url: jdbc:h2:mem:gameshop;MODE=MYSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create  # 개발용이니까 create, 나중에 update/validate 변경
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8080
