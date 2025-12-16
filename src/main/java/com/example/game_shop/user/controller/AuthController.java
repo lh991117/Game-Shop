@@ -3,7 +3,9 @@ package com.example.game_shop.user.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.game_shop.user.dto.Request.UserLoginRequest;
 import com.example.game_shop.user.dto.Request.UserSignUpRequest;
+import com.example.game_shop.user.dto.Response.UserLoginResponse;
 import com.example.game_shop.user.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,12 @@ public class AuthController {
     public ResponseEntity<Void> signUp(@RequestBody UserSignUpRequest request) {
         authService.signUp(request);
         return ResponseEntity.ok().build();
+    }
+
+    // 로그인
+    @PostMapping("/login")
+    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 
 }

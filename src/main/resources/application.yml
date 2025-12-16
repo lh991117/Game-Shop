@@ -19,3 +19,7 @@ spring:
 
 server:
   port: 8080
+
+jwt:
+  secret: 4382d2ecbd47f4f2ac2129f0b2757c6f74bdca03eb0b182afbcc9526934b8d85
+  access-token-expiration: 3600000 # 1시간 (ms)
