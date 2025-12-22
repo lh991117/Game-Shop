@@ -3,7 +3,8 @@ package com.example.game_shop.game.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.game_shop.game.dto.GameResponse;
+import com.example.game_shop.game.dto.request.GameCreateRequest;
+import com.example.game_shop.game.dto.response.GameResponse;
 import com.example.game_shop.game.service.GameService;
 import com.example.game_shop.global.common.ApiResponse;
 
@@ -11,7 +12,10 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,6 +23,12 @@ import org.springframework.web.bind.annotation.*;
 public class GameController {
 
     private final GameService gameService;
+
+    // 게임 등록(ADMIN만)
+    @PostMapping("/create")
+    public ResponseEntity<GameResponse> create(@RequestBody GameCreateRequest request) {
+        return ResponseEntity.ok(gameService.create(request));
+    }
 
     // 게임 목록
     @GetMapping

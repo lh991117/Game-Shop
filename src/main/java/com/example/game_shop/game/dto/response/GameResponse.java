@@ -1,4 +1,4 @@
-package com.example.game_shop.game.dto;
+package com.example.game_shop.game.dto.response;
 
 import com.example.game_shop.game.domain.Game;
 
