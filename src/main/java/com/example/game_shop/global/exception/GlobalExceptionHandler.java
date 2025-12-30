@@ -1,5 +1,7 @@
 package com.example.game_shop.global.exception;
 
+import javax.security.sasl.AuthenticationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,5 +40,12 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiResponse<Void> handleException(Exception e) {
         return ApiResponse.fail("서버 내부 오류가 발생했습니다.");
+    }
+
+    // 로그인 실패
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ApiResponse<Void> handleAuthException(AuthenticationException e) {
+        return ApiResponse.fail("이메일 또는 비밀번호가 올바르지 않습니다.");
     }
 }

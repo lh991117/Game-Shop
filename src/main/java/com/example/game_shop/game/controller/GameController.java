@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,8 +34,8 @@ public class GameController {
 
     // 게임 목록
     @GetMapping
-    public ApiResponse<List<GameResponse>> getGames() {
-        return ApiResponse.ok(gameService.getGames());
+    public Page<GameResponse> getGames(Pageable pageable) {
+        return gameService.getGames(pageable);
     }
 
     // 게임 상세

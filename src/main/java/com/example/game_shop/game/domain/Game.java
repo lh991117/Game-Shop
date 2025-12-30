@@ -27,12 +27,17 @@ public class Game extends BaseEntity {
     @Column(length = 1000)
     private String description;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private GameStatus status;
+
     @Builder
-    public Game(String title, int price, String platform, String genre, String description) {
+    public Game(String title, int price, String platform, String genre, String description, GameStatus status) {
         this.title = title;
         this.price = price;
         this.platform = platform;
         this.genre = genre;
         this.description = description;
+        this.status = status;
     }
 }
