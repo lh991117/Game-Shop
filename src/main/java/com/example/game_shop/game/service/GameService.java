@@ -2,10 +2,13 @@ package com.example.game_shop.game.service;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.game_shop.game.domain.Game;
+import com.example.game_shop.game.domain.GameStatus;
 import com.example.game_shop.game.dto.request.GameCreateRequest;
 import com.example.game_shop.game.dto.response.GameResponse;
 import com.example.game_shop.game.repository.GameRepository;
@@ -20,6 +23,7 @@ public class GameService {
 
     private final GameRepository gameRepository;
 
+    // 게임 목록 추가
     @Transactional
     public GameResponse create(GameCreateRequest request) {
         Game game = Game.builder()
@@ -28,21 +32,21 @@ public class GameService {
                 .platform(request.getPlatform())
                 .genre(request.getGenre())
                 .description(request.getDescription())
+                .status(GameStatus.ON_SALE)
                 .build();
 
         Game saved = gameRepository.save(game);
         return GameResponse.from(saved);
     }
 
-    public List<GameResponse> getGames() {
-        return gameRepository.findAll()
-                .stream()
-                .map(GameResponse::from)
-                .toList();
+    // 게임 전체 조회
+    public Page<GameResponse> getGames(Pageable pageable) {
+        return gameRepository.findAllByStatus(GameStatus.ON_SALE, pageable)
+                .map(GameResponse::from);
     }
 
     public GameResponse getGame(Long id) {
-        Game game = gameRepository.findById(id)
+        Game game = gameRepository.findByIdAndStatus(id, GameStatus.ON_SALE)
                 .orElseThrow(() -> new NotFoundException("게임을 찾을 수 없습니다. id=" + id));
 
         return GameResponse.from(game);
