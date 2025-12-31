@@ -2,8 +2,8 @@ package com.example.game_shop.game.service;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,5 +50,13 @@ public class GameService {
                 .orElseThrow(() -> new NotFoundException("게임을 찾을 수 없습니다. id=" + id));
 
         return GameResponse.from(game);
+    }
+
+    @Transactional
+    public void updateGameStatus(Long gameId, GameStatus status) {
+        Game game = gameRepository.findById(gameId)
+        .orElseThrow(()->new NotFoundException("게임을 찾을 수 없습니다."));
+
+        game.changeStatus(status);
     }
 }

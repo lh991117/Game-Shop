@@ -40,4 +40,8 @@ public class Game extends BaseEntity {
         this.description = description;
         this.status = status;
     }
+
+    public void changeStatus(GameStatus status) {
+        this.status = status;
+    }
 }
