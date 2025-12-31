@@ -59,6 +59,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/signup", "/auth/login").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/games/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/gmaes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/games/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
