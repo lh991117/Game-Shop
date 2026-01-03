@@ -45,6 +45,12 @@ public class GameService {
                 .map(GameResponse::from);
     }
 
+    // 게임 전체 조회(관리자용)
+    public Page<GameResponse> getGamesAdmin(Pageable pageable) {
+        return gameRepository.findAll(pageable)
+                .map(GameResponse::from);
+    }
+
     public GameResponse getGame(Long id) {
         Game game = gameRepository.findByIdAndStatus(id, GameStatus.ON_SALE)
                 .orElseThrow(() -> new NotFoundException("게임을 찾을 수 없습니다. id=" + id));
@@ -55,7 +61,7 @@ public class GameService {
     @Transactional
     public void updateGameStatus(Long gameId, GameStatus status) {
         Game game = gameRepository.findById(gameId)
-        .orElseThrow(()->new NotFoundException("게임을 찾을 수 없습니다."));
+                .orElseThrow(() -> new NotFoundException("게임을 찾을 수 없습니다."));
 
         game.changeStatus(status);
     }

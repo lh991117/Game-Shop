@@ -26,22 +26,6 @@ public class GameController {
 
     private final GameService gameService;
 
-    // 게임 등록(ADMIN만)
-    @PostMapping("/create")
-    public ResponseEntity<GameResponse> create(@RequestBody GameCreateRequest request) {
-        return ResponseEntity.ok(gameService.create(request));
-    }
-
-    // 게임 상태값 변경(ADMIN만)
-    @PatchMapping("/{id}/status")
-    public ResponseEntity<Void> updateStatus(
-        @PathVariable Long id,
-        @RequestBody @Valid GameStatusUpdateRequest request
-    ) {
-        gameService.updateGameStatus(id, request.getStatus());
-        return ResponseEntity.noContent().build();
-    }
-
     // 게임 목록
     @GetMapping
     public Page<GameResponse> getGames(Pageable pageable) {
