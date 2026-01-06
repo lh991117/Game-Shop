@@ -30,7 +30,7 @@ public class GameController {
     private final GameService gameService;
     private final PurchaseService purchaseService;
 
-    @PostMapping("/{id}/purchase")
+    @PostMapping("/{gameId}/purchase")
     public PurchaseResponse purchase(@AuthUserId Long userId, @PathVariable Long gameId) {
         return purchaseService.purchase(userId, gameId);
     }
