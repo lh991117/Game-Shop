@@ -8,6 +8,9 @@ import com.example.game_shop.game.dto.request.GameStatusUpdateRequest;
 import com.example.game_shop.game.dto.response.GameResponse;
 import com.example.game_shop.game.service.GameService;
 import com.example.game_shop.global.common.ApiResponse;
+import com.example.game_shop.user.annotation.AuthUserId;
+import com.example.game_shop.user.dto.Response.PurchaseResponse;
+import com.example.game_shop.user.service.PurchaseService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +28,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class GameController {
 
     private final GameService gameService;
+    private final PurchaseService purchaseService;
+
+    @PostMapping("/{id}/purchase")
+    public PurchaseResponse purchase(@AuthUserId Long userId, @PathVariable Long gameId) {
+        return purchaseService.purchase(userId, gameId);
+    }
 
     // 게임 목록
     @GetMapping

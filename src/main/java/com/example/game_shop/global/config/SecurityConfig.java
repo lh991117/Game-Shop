@@ -59,7 +59,8 @@ public class SecurityConfig {
                         .requestMatchers("/auth/signup", "/auth/login").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/admin/games/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/games/**").permitAll()
+                        .requestMatchers("/games/**").permitAll()
+                        .requestMatchers("/library/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()));
