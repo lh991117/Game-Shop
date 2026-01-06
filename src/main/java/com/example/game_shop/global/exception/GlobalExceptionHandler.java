@@ -48,4 +48,16 @@ public class GlobalExceptionHandler {
     public ApiResponse<Void> handleAuthException(AuthenticationException e) {
         return ApiResponse.fail("이메일 또는 비밀번호가 올바르지 않습니다.");
     }
+
+    @ExceptionHandler(ConflictException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiResponse<Void> handleConflict(ConflictException e) {
+        return ApiResponse.fail(e.getMessage());
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ApiResponse<Void> handleUnauthorized(UnauthorizedException e) {
+        return ApiResponse.fail(e.getMessage());
+    }
 }
