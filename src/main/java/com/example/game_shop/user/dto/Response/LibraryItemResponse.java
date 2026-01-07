@@ -3,6 +3,7 @@ package com.example.game_shop.user.dto.Response;
 import java.time.LocalDateTime;
 
 import com.example.game_shop.game.domain.Game;
+import com.example.game_shop.game.domain.GameGenre;
 import com.example.game_shop.user.domain.UserGame;
 
 import lombok.Builder;
@@ -15,7 +16,7 @@ public class LibraryItemResponse {
     private Long gameId;
     private String title;
     private String platform;
-    private String genre;
+    private GameGenre genre;
     private LocalDateTime purchasedAt;
 
     public static LibraryItemResponse from(UserGame ug) {

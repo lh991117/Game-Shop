@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.game_shop.game.domain.Game;
 import com.example.game_shop.game.domain.GameStatus;
 
-public interface GameRepository extends JpaRepository<Game, Long> {
+public interface GameRepository extends JpaRepository<Game, Long>, GameRepositoryCustom {
 
     Page<Game> findAllByStatus(GameStatus status, Pageable pageable);
 

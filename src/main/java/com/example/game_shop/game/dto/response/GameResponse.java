@@ -1,6 +1,7 @@
 package com.example.game_shop.game.dto.response;
 
 import com.example.game_shop.game.domain.Game;
+import com.example.game_shop.game.domain.GameGenre;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,7 @@ public class GameResponse {
     private String title;
     private int price;
     private String platform;
-    private String genre;
+    private GameGenre genre;
     private String description;
 
     public static GameResponse from(Game game) {
