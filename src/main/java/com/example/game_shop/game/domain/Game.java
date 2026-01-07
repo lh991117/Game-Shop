@@ -22,7 +22,8 @@ public class Game extends BaseEntity {
 
     private String platform;
 
-    private String genre;
+    @Enumerated(EnumType.STRING)
+    private GameGenre genre;
 
     @Column(length = 1000)
     private String description;
@@ -32,7 +33,7 @@ public class Game extends BaseEntity {
     private GameStatus status;
 
     @Builder
-    public Game(String title, int price, String platform, String genre, String description, GameStatus status) {
+    public Game(String title, int price, String platform, GameGenre genre, String description, GameStatus status) {
         this.title = title;
         this.price = price;
         this.platform = platform;
