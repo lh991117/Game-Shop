@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.game_shop.game.domain.Game;
+import com.example.game_shop.game.domain.GameSearchCondition;
+import com.example.game_shop.game.domain.GameSortType;
 import com.example.game_shop.game.domain.GameStatus;
 import com.example.game_shop.game.dto.request.GameCreateRequest;
 import com.example.game_shop.game.dto.response.GameResponse;
@@ -48,6 +50,13 @@ public class GameService {
     // 게임 전체 조회(관리자용)
     public Page<GameResponse> getGamesAdmin(Pageable pageable) {
         return gameRepository.findAll(pageable)
+                .map(GameResponse::from);
+    }
+
+    public Page<GameResponse> searchForUser(GameSearchCondition condition, String sort, Pageable pageable) {
+        GameSortType sortType = GameSortType.from(sort);
+
+        return gameRepository.searchForUser(condition, sortType, pageable)
                 .map(GameResponse::from);
     }
 
