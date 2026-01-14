@@ -60,6 +60,13 @@ public class GameService {
                 .map(GameResponse::from);
     }
 
+    public Page<GameResponse> searchForAdmin(GameSearchCondition condition, String sort, Pageable pageable) {
+        GameSortType sortType = GameSortType.from(sort);
+
+        return gameRepository.searchForAdmin(condition, sortType, pageable)
+                .map(GameResponse::from);
+    }
+
     public GameResponse getGame(Long id) {
         Game game = gameRepository.findByIdAndStatus(id, GameStatus.ON_SALE)
                 .orElseThrow(() -> new NotFoundException("게임을 찾을 수 없습니다. id=" + id));
