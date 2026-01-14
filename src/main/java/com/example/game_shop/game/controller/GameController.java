@@ -3,6 +3,7 @@ package com.example.game_shop.game.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.game_shop.game.domain.GameSearchCondition;
 import com.example.game_shop.game.dto.request.GameCreateRequest;
 import com.example.game_shop.game.dto.request.GameStatusUpdateRequest;
 import com.example.game_shop.game.dto.response.GameResponse;
@@ -17,10 +18,13 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @RestController
@@ -46,4 +50,13 @@ public class GameController {
     public ApiResponse<GameResponse> getGame(@PathVariable Long id) {
         return ApiResponse.ok(gameService.getGame(id));
     }
+
+    @GetMapping("/search")
+    public Page<GameResponse> search(
+            GameSearchCondition condition,
+            @RequestParam(required = false) String sort,
+            @PageableDefault(size = 20) Pageable pageable) {
+        return gameService.searchForUser(condition, sort, pageable);
+    }
+
 }

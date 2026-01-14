@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.game_shop.game.domain.GameSearchCondition;
 import com.example.game_shop.game.dto.request.GameCreateRequest;
 import com.example.game_shop.game.dto.request.GameStatusUpdateRequest;
 import com.example.game_shop.game.dto.response.GameResponse;
@@ -45,6 +46,14 @@ public class AdminGameController {
     @GetMapping
     public Page<GameResponse> getGamesAdmin(Pageable pageable) {
         return gameService.getGamesAdmin(pageable);
+    }
+
+    @GetMapping("/search")
+    public Page<GameResponse> searchAdmin(
+            GameSearchCondition condition,
+            @RequestParam(required = false) String sort,
+            Pageable pageable) {
+        return gameService.searchForAdmin(condition, sort, pageable);
     }
 
 }
