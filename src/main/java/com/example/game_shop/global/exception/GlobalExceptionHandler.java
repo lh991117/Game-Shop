@@ -60,4 +60,10 @@ public class GlobalExceptionHandler {
     public ApiResponse<Void> handleUnauthorized(UnauthorizedException e) {
         return ApiResponse.fail(e.getMessage());
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiResponse<Void> handleIllegalArgument(IllegalArgumentException e) {
+        return ApiResponse.fail("잘못된 요청 값입니다.");
+    }
 }
