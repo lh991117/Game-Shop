@@ -42,3 +42,6 @@ out/
 # Logs
 logs/
 *.log
+
+# local security config
+src/main/resources/application-local.yml
