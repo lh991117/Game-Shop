@@ -1,10 +1,14 @@
 # src/main/resources/application.yml
 spring:
+  profiles:
+    default: local
+
   datasource:
     url: jdbc:h2:mem:gameshop;MODE=MYSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password:
+
   jpa:
     hibernate:
       ddl-auto: create  # 개발용이니까 create, 나중에 update/validate 변경
@@ -12,6 +16,7 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+
   h2:
     console:
       enabled: true
@@ -21,5 +26,5 @@ server:
   port: 8080
 
 jwt:
-  secret: 4382d2ecbd47f4f2ac2129f0b2757c6f74bdca03eb0b182afbcc9526934b8d85
-  access-token-expiration: 3600000 # 1시간 (ms)
+  secret: ${JWT_SECRET}
+  access-token-expiration: ${JWT_ACCESS_TOKEN_EXPIRATION:3600000}
