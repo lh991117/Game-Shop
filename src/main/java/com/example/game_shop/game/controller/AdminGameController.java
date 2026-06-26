@@ -30,7 +30,7 @@ public class AdminGameController {
 
     // 게임 등록
     @PostMapping("/create")
-    public ResponseEntity<GameResponse> create(@RequestBody GameCreateRequest request) {
+    public ResponseEntity<GameResponse> create(@Valid @RequestBody GameCreateRequest request) {
         return ResponseEntity.ok(gameService.create(request));
     }
 
